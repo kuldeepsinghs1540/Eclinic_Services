@@ -4,6 +4,9 @@
     Author     : kulde
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -21,6 +24,33 @@
 </head>
 
 <body>
+     <%
+        String   email1 = null;
+        String  pass1 = null;
+    if(session!=null)
+        {
+         email1 = (String) session.getAttribute("USER");
+         pass1 = (String) session.getAttribute("password");
+         if(email1==null && pass1==null)
+       {
+          %>            
+            <script>
+                       alert('please Login first');  
+                      window.location = "index.html";
+            </script>
+            <%  
+        }
+else{
+        Connection connection = Mycon.MyConnection.getcon();
+        String featch = "select * from patient where email=? and password=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(featch);
+        preparedStatement.setString(1, email1);
+        preparedStatement.setString(2, pass1);
+        ResultSet rs = preparedStatement.executeQuery();
+        
+        if(rs.next())
+      {
+    %>
     <!-- navbar start here -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -45,11 +75,11 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Get Appoinment</a></li>
+                            <li><a class="dropdown-item" href="#Appointment">Get Appoinment</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">LogOut</a></li>
+                            <li><a class="dropdown-item" href="LogOut.jsp">LogOut</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -82,7 +112,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='LogOut.jsp';">Confirm</button>
                 </div>
             </div>
         </div>
@@ -103,8 +133,8 @@
                 <div class="carousel-caption d-none d-md-block">
                     <h5>WelCome to eClinic</h5>
                     <p>Time is generally the best doctor.</p>
-                    <button class="btn btn-success">Get Appoinment</button>
-                    <button class="btn btn-primary">Doctor List</button>
+                    <button class="btn btn-success" onclick="location.href='#Appointment';">Get Appoinment</button>
+                    <button class="btn btn-primary" onclick="location.href='DocterListForPatient.jsp';">Doctor List</button>
                 </div>
             </div>
             <div class="carousel-item">
@@ -113,8 +143,8 @@
                     <h5>WelCome to eClinic</h5>
                     <p>The first step toward success is taken when you refuse to be a captive of the environment in
                         which you first find yourself.</p>
-                    <button class="btn btn-success">Get Appoinment</button>
-                    <button class="btn btn-primary">Doctor List</button>
+                    <button class="btn btn-success" onclick="location.href='#Appointment';">Get Appoinment</button>
+                    <button class="btn btn-primary" onclick="location.href='DocterListForPatient.jsp';">Doctor List</button>
                 </div>
             </div>
             <div class="carousel-item">
@@ -124,8 +154,8 @@
                     <p>Nothing in life is to be feared, it is only to be understood. Now is the time to understand more,
                         so that we may fear less.</p>
                     <p> ~ Marie Curie</p>
-                    <button class="btn btn-success">Get Appoinment</button>
-                    <button class="btn btn-primary">Doctor List</button>
+                    <button class="btn btn-success" onclick="location.href='#Appointment';" >Get Appoinment</button>
+                    <button class="btn btn-primary" onclick="location.href='DocterListForPatient.jsp';" >Doctor List</button>
                 </div>
             </div>
         </div>
@@ -143,12 +173,12 @@
 
     <!-- slidebar end here -->
     <!-- Appoinment start here -->
-    <section>
+    <section id="Appointment">
         <div class="container-fluid my-4,0">
             <div class="row g-xl-5">
                 <div class="col-md-6 d-flex align-items-stretch aos-init aos-animate"
                     style="background-color: rgb(45, 206, 218);">
-                    <form action="#">
+                    <form action="Appointment.jsp">
                         <div>
                             <span class="subheading">We Are Here For You</span>
                             <h2 class="mb-5 appointment-head">Make An Appointment</h2>
@@ -156,32 +186,32 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="subject">Your Full Name</label>
-                                        <input type="text" class="form-control" placeholder="Your Full Name">
+                                        <input type="text" class="form-control" placeholder="Your Full Name" name="name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="subject">Email Address</label>
-                                        <input type="text" class="form-control" placeholder="Email">
+                                        <input type="email" class="form-control" placeholder="Email" name="email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="subject">Phone Number</label>
-                                        <input type="text" class="form-control" placeholder="Your Phone Number">
+                                        <input type="text" class="form-control" placeholder="Your Phone Number" name="mobile" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="subject">Appointment Date</label>
-                                        <input type="text" class="form-control arrival_date datepicker-input"
-                                            placeholder="Appointment Date">
+                                        <input type="date" class="form-control arrival_date datepicker-input"
+                                            placeholder="Appointment Date" name="Adate" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="subject">Appointment Time</label>
-                                        <input type="text" class="form-control" placeholder="Appointment Time">
+                                        <input type="time" class="form-control" placeholder="Appointment Time" name="appointment" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -190,13 +220,22 @@
                                         <div class="form-field">
                                             <div class="select-wrap">
                                                 <div class="icon"><span class="fa fa-chevron-down"></span></div>
-                                                <select name="" id="" class="form-control">
-                                                    <option value="">Dr. Lloyd Wilson</option>
-                                                    <option value="">Dr. Rachel Parker</option>
-                                                    <option value="">Dr. Ian Smith</option>
-                                                    <option value="">Dr. Alicia Henderson</option>
-                                                    <option value="">Dr. Robert Johnson</option>
-                                                    <option value="">Dr. Blake Wood</option>
+                                                <select name="drName" id="" class="form-control">
+                                                     <%
+                                                        Connection connection1 = Mycon.MyConnection.getcon();
+                                                        String fetch = "select * from doctorinformation";
+                                                        PreparedStatement pst1=connection1.prepareStatement(fetch);
+              
+                                                        ResultSet rs1=pst1.executeQuery();
+                                                        
+                                                        while(rs1.next())
+                                                        {
+                                                          String name1 =  rs1.getString("name");
+                                                        %>
+                                                        <option value="<%= name1%>"><%= name1%></option>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </select>
                                             </div>
                                         </div>
@@ -205,10 +244,22 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="subject">Message</label>
-                                        <textarea name="" id="" cols="0" rows="5" class="form-control"
-                                            placeholder="Message"></textarea>
+                                        <textarea name="message" id="" cols="0" rows="5" class="form-control"
+                                            placeholder="Message" required></textarea>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="radio inline"> Gender : 
+                                                    <input type="radio" name="gender" value="male" checked>
+                                                    <span> Male </span> 
+                                                </label>
+                                                <label class="radio inline"> 
+                                                    <input type="radio" name="gender" value="female">
+                                                    <span>Female </span> 
+                                                </label>
+                                    </div>
+                                </div>  
                                 <div class="col-md-12 d-flex align-items-center">
                                     <div class="d-grid gap-2 col-6 mx-auto">
                                         <input type="submit" value="Send message" class="btn btn-success">
@@ -222,7 +273,7 @@
                     data-aos-delay="200" data-aos-duration="1000">
                     <div class="mt-0 my-lg-5 py-5">
                         <span class="subheading">Learn Anything</span>
-                        <h2 class="mb-2">We Offer Best Dental Services</h2>
+                        <h2 class="mb-2">We Offer Best Services</h2>
                         <div class="row mt-4 g-lg-2">
                             <div class="col-lg-12 d-flex align-items-stretch services-wrap">
                                 <div class="services d-flex">
@@ -238,7 +289,7 @@
                                 <div class="services d-flex">
                                     <div class="icon"><span class="flaticon-dentist"></span></div>
                                     <div class="text">
-                                        <h2>Team Dentist</h2>
+                                        <h2>Team </h2>
                                         <p class="mb-0">Far far away, behind the word mountains, far from the countries
                                             Vokalia and Consonantia, there live the blind texts.</p>
                                     </div>
@@ -268,7 +319,31 @@
     </footer>
 
     <!-- footer end here -->
-
+    <%
+    }else
+            {
+          %>            
+            <script>
+                        alert('Only User can acess');
+                        window.location = "index.html";
+            </script>
+            <%  
+        }
+}
+        }
+          if(session==null){
+            if(email1==null)
+      {
+            %>
+            
+            <script>
+                        alert('please Login first');
+                        window.location = "index.html";
+            </script>
+            <%
+                }
+       }
+        %>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
