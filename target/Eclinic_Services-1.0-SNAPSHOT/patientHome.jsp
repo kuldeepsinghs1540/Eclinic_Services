@@ -4,6 +4,8 @@
     Author     : kulde
 --%>
 
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -83,7 +85,7 @@ else{
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="AboutUs.jsp">About Us</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -203,17 +205,12 @@ else{
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="subject">Appointment Date</label>
-                                        <input type="date" class="form-control arrival_date datepicker-input"
-                                            placeholder="Appointment Date" name="Adate" required>
+                                        <label for="subject">Appointment Date and Time</label>
+                                       <input type="text" class="form-control" value="<%= (new java.util.Date()).toLocaleString()%>" name="Adate" required readonly>
+
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="subject">Appointment Time</label>
-                                        <input type="time" class="form-control" placeholder="Appointment Time" name="appointment" required>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="subject">Select A Doctor</label>
@@ -245,7 +242,7 @@ else{
                                     <div class="form-group">
                                         <label for="subject">Message</label>
                                         <textarea name="message" id="" cols="0" rows="5" class="form-control"
-                                            placeholder="Message" required></textarea>
+                                            placeholder="Describe your problem" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

@@ -114,14 +114,14 @@ else{
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6" onclick="location.href='#';" style="cursor: pointer;">
+                <div class="col-md-4 col-sm-6" onclick="location.href='AllPatienList.jsp';" style="cursor: pointer;">
                     <div class="single-key">
                         <i class="fas fa-briefcase-medical"></i>
                         <h5>List Of patient</h5>
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6" onclick="location.href='#';" style="cursor: pointer;">
+                <div class="col-md-4 col-sm-6" onclick="location.href='AllAppoinment.jsp';" style="cursor: pointer;">
                     <div class="single-key">
                         <i class="fas fa-capsules"></i>
                         <h5>All Appointments</h5>

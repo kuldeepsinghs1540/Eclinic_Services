@@ -34,16 +34,16 @@ else{
         
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-        String Adate = request.getParameter("Adate");
-        String appointment = request.getParameter("appointment");
+        String Adate = null;
+        String appointment = null;
         String drName = request.getParameter("drName");
         String message = request.getParameter("message");
         String gender = request.getParameter("gender");
         String mobile = request.getParameter("mobile");
-        
+        String status = "Pending";
         try{
             Connection connection = Mycon.MyConnection.getcon();
-            String insert = "insert into appointment value(?,?,?,?,?,?,?,?,?)";
+            String insert = "insert into appointment value(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, email);
@@ -54,6 +54,7 @@ else{
             preparedStatement.setString(7, appointment);
             preparedStatement.setString(8, message);
             preparedStatement.setString(9, email1);
+            preparedStatement.setString(10, status);
             int x = preparedStatement.executeUpdate();
             if(x>0){
                  %>            
