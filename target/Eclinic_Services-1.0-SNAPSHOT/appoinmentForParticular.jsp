@@ -190,6 +190,33 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+     <%
+        String   email1 = null;
+        String  pass1 = null;
+    if(session!=null)
+        {
+         email1 = (String) session.getAttribute("USER");
+         pass1 = (String) session.getAttribute("password");
+         if(email1==null && pass1==null)
+       {
+          %>            
+            <script>
+                       alert('please Login first');  
+                      window.location = "index.html";
+            </script>
+            <%  
+        }
+else{
+        Connection connection1 = Mycon.MyConnection.getcon();
+        String featch = "select * from doctorinformation where email=? and password=?";
+        PreparedStatement preparedStatement1 = connection1.prepareStatement(featch);
+        preparedStatement1.setString(1, email1);
+        preparedStatement1.setString(2, pass1);
+        ResultSet rs1 = preparedStatement1.executeQuery();
+        
+        if(rs1.next())
+      {
+%>
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -250,6 +277,31 @@ $(document).ready(function(){
             </div>
         </div>
     </div>
-</div>     
+</div>  
+<%
+    }else
+            {
+          %>            
+            <script>
+                        alert('Only Doctor can acess');
+                        window.location = "index.html";
+            </script>
+            <%  
+        }
+}
+        }
+          if(session==null){
+            if(email1==null)
+      {
+            %>
+            
+            <script>
+                        alert('please Login first');
+                        window.location = "index.html";
+            </script>
+            <%
+                }
+       }
+        %>
 </body>
 </html>

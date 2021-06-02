@@ -77,7 +77,7 @@ else{
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#Appointment">Get Appoinment</a></li>
+                            <li><a class="dropdown-item" href="CheckStatus.jsp">Check Status</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

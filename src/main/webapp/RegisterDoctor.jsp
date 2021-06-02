@@ -112,6 +112,26 @@
         </style>
     </head>
     <body>
+        <%
+        String   email1 = null;
+        String  pass1 = null;
+    if(session!=null)
+        {
+         email1 = (String) session.getAttribute("USER");
+         pass1 = (String) session.getAttribute("password");
+         if(email1==null && pass1==null)
+       {
+          %>            
+            <script>
+                       alert('please Login first');  
+                      window.location = "index.html";
+            </script>
+            <%  
+        }
+else{
+      if(email1.equals("admin123@gmail.com") && pass1.equals("admin"))
+      {
+    %>
         <div class="container register">
                 <div class="row">
                     <div class="col-md-3 register-left">
@@ -186,5 +206,31 @@
                 </div>
 
             </div>
+        
+        <%
+    }else
+            {
+          %>            
+            <script>
+                        alert('Only admin can acess');
+                        window.location = "index.html";
+            </script>
+            <%  
+        }
+}
+        }
+          if(session==null){
+            if(email1==null)
+      {
+            %>
+            
+            <script>
+                        alert('please Login first');
+                        window.location = "index.html";
+            </script>
+            <%
+                }
+       }
+        %>
     </body>
 </html>
