@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.DoctorManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -235,34 +236,22 @@ else{
                 </thead>
                 <tbody>
                     <%
-                    Connection connection = Mycon.MyConnection.getcon();
-                    String fetch = "select * from doctorinformation";
-                    PreparedStatement pst=connection.prepareStatement(fetch);
-              
-            ResultSet rs=pst.executeQuery();
-            int count = 0;
+            DoctorManager doctor=new DoctorManager();
+            ResultSet rs= doctor.allDoctor();
             while(rs.next())
             {
-                count++;
-              String name =  rs.getString("name");
-              String email =  rs.getString("email");
-              String mobile = rs.getString("phone");
-              String Specialization = rs.getString("specialization");
-              String Qualification = rs.getString("qualification");
-              String Gender = rs.getString("gender");
-              String Address = rs.getString("address");
-                    %>
+            %>
                     <tr>
-                        <td><%= name %></td>
-                        <td><%= email%></td>
-                        <td><%= mobile %></td>                        
-                        <td><%= Specialization %></td>
-                        <td><%= Qualification%></td>
-                        <td><%= Gender %></td>
-                        <td><%= Address %></td>
+                        <td><%= rs.getString("name") %></td>
+                        <td><%= rs.getString("email")%></td>
+                        <td><%= rs.getString("phone") %></td>                        
+                        <td><%= rs.getString("specialization") %></td>
+                        <td><%= rs.getString("qualification")%></td>
+                        <td><%= rs.getString("Gender") %></td>
+                        <td><%= rs.getString("address") %></td>
                         <td>
-                            <a href="EditDoctor.jsp?uemail=<%= email%>" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
-                            <a href="DeletDoctor.jsp?uemail=<%= email%>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                            <a href="EditDoctor.jsp?uemail=<%= rs.getString("email")%>" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
+                            <a href="DeletDoctor.jsp?uemail=<%= rs.getString("email")%>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                         </td>
                     </tr>
                   <%

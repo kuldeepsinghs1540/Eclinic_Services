@@ -1,1 +1,7 @@
+DAO\DoctorManager.class
+DTO\Patient.class
+DTO\Doctor.class
+DTO\Appointment.class
+DAO\PatientManager.class
 Mycon\MyConnection.class
+DAO\AppoinmentManager.class

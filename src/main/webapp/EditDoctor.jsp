@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.DoctorManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -131,20 +132,10 @@
                         </ul>
                         <%
                             String email = request.getParameter("uemail");
-                    Connection connection = Mycon.MyConnection.getcon();
-                    String fetch = "select * from doctorinformation where email = ?";
-                    PreparedStatement pst=connection.prepareStatement(fetch);
-                    pst.setString(1, email);
-                     ResultSet rs=pst.executeQuery();
+                            DoctorManager mgr=new DoctorManager();
+                        ResultSet rs= mgr.show(email);
             if(rs.next())
             {
-              String name =  rs.getString("name");
-              String mobile = rs.getString("phone");
-              String pass = rs.getString("password");
-              String Specialization = rs.getString("specialization");
-              String Qualification = rs.getString("qualification");
-              String Gender = rs.getString("gender");
-              String Address = rs.getString("address");
                     %>
              <form action="UpdateDoctor.jsp" method="Post">
                 <div class="tab-content" id="myTabContent">
@@ -153,16 +144,16 @@
                          <div class="row register-form">
                                   <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" value="<%= name %>" name="Name">
+                                            <input type="text" class="form-control" value="<%= rs.getString("name") %>" name="name">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" value="<%= pass%>" name="passw" >
+                                            <input type="password" class="form-control" value="<%= rs.getString("password")%>" name="password">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control"  value="<%= pass%>" name="confirmpassw" >
+                                            <input type="password" class="form-control"  value="<%= rs.getString("password")%>"  >
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" value="<%= Address %>" name="add">
+                                            <input type="text" class="form-control" value="<%= rs.getString("address") %>" name="address">
                                         </div>
                                         <div class="form-group">
                                             <div class="maxl">
@@ -182,7 +173,7 @@
                                             <input type="email" class="form-control" readonly value="<%= email %>" name="email">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10" name="txtPhone" class="form-control" value="<%= mobile %>">
+                                            <input type="text" minlength="10" maxlength="10" name="txtPhone" class="form-control" value="<%= rs.getString("phone") %>">
                                         </div>
                                         <div class="form-group">
                                             <select name="spec" class="form-control">
@@ -194,7 +185,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" value="<%= Qualification%>" name="qualification">
+                                            <input type="text" class="form-control" value="<%= rs.getString("qualification")%>" name="qualification">
                                         </div>
                                         <input type="submit" class="btnRegister"  value="update"/>
                                     </div>

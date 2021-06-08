@@ -153,16 +153,16 @@ else{
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Full Name *" name="Name" required>
+                                            <input type="text" class="form-control" placeholder="Full Name *" name="name" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Password *" name="passw" required>
+                                            <input type="password" class="form-control" placeholder="Password *" name="password" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control"  placeholder="Confirm Password *" name="confirmpassw" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Address *" name="add" required>
+                                            <input type="text" class="form-control" placeholder="Address *" name="address" required>
                                         </div>
                                         <div class="form-group">
                                             <div class="maxl">

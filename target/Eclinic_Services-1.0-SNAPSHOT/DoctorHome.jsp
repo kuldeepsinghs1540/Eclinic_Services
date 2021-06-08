@@ -78,7 +78,7 @@ else{
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="appoinmentForParticular.jsp?uname=<%= name%>">Pending Appoinment</a></li>
                             <li><a class="dropdown-item" href="ConfirmAppoinmentlist.jsp?uname=<%= name%>">Confirm Appoinments</a></li>
-                            <li><a class="dropdown-item" href="DeclineAppoinmentlist .jsp?uname=<%= name%>">Decline Appoinments</a></li>
+                            <li><a class="dropdown-item" href="DeclineAppoinmentlist.jsp?uname=<%= name%>">Decline Appoinments</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
