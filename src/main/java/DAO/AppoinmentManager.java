@@ -97,14 +97,14 @@ public class AppoinmentManager {
         }
         return x;
     }
-    public ResultSet ConfirmAppoinmentlist(String name){
+    public ResultSet ConfirmAppoinmentlist(String email){
         ResultSet rs1 = null;
                     try
             {
                 Connection connection1 = Mycon.MyConnection.getcon();
                     String fetch = "select * from appointment where doctor=? and Status=?";
                     PreparedStatement pst=connection1.prepareStatement(fetch);
-                    pst.setString(1, name);
+                    pst.setString(1, email);
                     pst.setString(2, "Accept");
             ResultSet rs=pst.executeQuery();
             return rs;
@@ -113,14 +113,14 @@ public class AppoinmentManager {
                    }
           return rs1;
     }
-    public ResultSet pandingAppoinmentlist(String name){
+    public ResultSet pandingAppoinmentlist(String email){
         ResultSet rs1 = null;
                     try
             {
                 Connection connection = Mycon.MyConnection.getcon();
                     String fetch = "select * from appointment where doctor=? and Status=?";
                     PreparedStatement pst=connection.prepareStatement(fetch);
-                    pst.setString(1, name);
+                    pst.setString(1, email);
                     pst.setString(2, "Pending");
             ResultSet rs=pst.executeQuery();
             return rs;
@@ -146,14 +146,14 @@ public class AppoinmentManager {
           return rs1;
     }
     
-    public ResultSet DeclineAppoinmentlist(String name){
+    public ResultSet DeclineAppoinmentlist(String email){
         ResultSet rs1 = null;
                     try
             {
                     Connection connection1 = Mycon.MyConnection.getcon();
                     String fetch = "select * from appointment where doctor=? and Status=?";
                     PreparedStatement pst=connection1.prepareStatement(fetch);
-                    pst.setString(1, name);
+                    pst.setString(1, email);
                     pst.setString(2, "Rejected");
             ResultSet rs=pst.executeQuery();
             return rs;

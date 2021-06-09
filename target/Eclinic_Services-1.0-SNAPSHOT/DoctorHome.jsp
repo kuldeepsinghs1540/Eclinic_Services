@@ -76,9 +76,9 @@ else{
                             Appoinments
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="appoinmentForParticular.jsp?uname=<%= name%>">Pending Appoinment</a></li>
-                            <li><a class="dropdown-item" href="ConfirmAppoinmentlist.jsp?uname=<%= name%>">Confirm Appoinments</a></li>
-                            <li><a class="dropdown-item" href="DeclineAppoinmentlist.jsp?uname=<%= name%>">Decline Appoinments</a></li>
+                            <li><a class="dropdown-item" href="appoinmentForParticular.jsp?uname=<%= email1%>">Pending Appoinment</a></li>
+                            <li><a class="dropdown-item" href="ConfirmAppoinmentlist.jsp?uname=<%= email1%>">Confirm Appoinments</a></li>
+                            <li><a class="dropdown-item" href="DeclineAppoinmentlist.jsp?uname=<%= email1%>">Decline Appoinments</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
@@ -119,7 +119,7 @@ else{
                 <img src="https://source.unsplash.com/1400x600/?patient,hospital" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>First slide label</h5>
-                    <button type="button" class="btn btn-success btn-lg" onclick="location.href='appoinmentForParticular.jsp?uname=<%= name%>';" >Appoinment</button>
+                    <button type="button" class="btn btn-success btn-lg" onclick="location.href='appoinmentForParticular.jsp?uname=<%= email1%>';" >Appoinment</button>
                     <button type="button" class="btn btn-info btn-lg" onclick="location.href='ProfileDoctor.jsp';">Profile</button>
                 </div>
             </div>
@@ -127,7 +127,7 @@ else{
                 <img src="https://source.unsplash.com/1400x600/?hospital,help" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Second slide label</h5>
-                    <button type="button" class="btn btn-success btn-lg" onclick="location.href='appoinmentForParticular.jsp?uname=<%= name%>';" >Appoinment</button>
+                    <button type="button" class="btn btn-success btn-lg" onclick="location.href='appoinmentForParticular.jsp?uname=<%= email1%>';" >Appoinment</button>
                     <button type="button" class="btn btn-info btn-lg" onclick="location.href='ProfileDoctor.jsp';">Profile</button>
 
                 </div>
@@ -136,7 +136,7 @@ else{
                 <img src="https://source.unsplash.com/1400x600/?doctor,codeing" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Third slide label</h5>
-                    <button type="button" class="btn btn-success btn-lg" onclick="location.href='appoinmentForParticular.jsp?uname=<%= name%>';" >Appoinment</button>
+                    <button type="button" class="btn btn-success btn-lg" onclick="location.href='appoinmentForParticular.jsp?uname=<%= email1%>';" >Appoinment</button>
                     <button type="button" class="btn btn-info btn-lg" onclick="location.href='ProfileDoctor.jsp';">Profile</button>
                 </div>
             </div>

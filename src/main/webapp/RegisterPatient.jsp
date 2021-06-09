@@ -83,21 +83,20 @@ a {
 </head>
 <script>
     
-    function verifyPass(){
-        var validation = (document.getElementById('psw').value == document.getElementById('cpsw').value);
-      if(!validation){
-         alert('Something went wrong...Plese reenter password');
-         return false;
-      }
-      return true;
-   }
-    }
+    function validateform(){  
+var password=document.myForm.password.value;  
+var cpsw = document.myForm.cpsw.value; 
+if(password!=cpsw){  
+  alert("Password not match.");  
+  return false;  
+  }  
+}  
     
 </script>
 <body>
 
     <div class="formcenter">
-    <form onsubmit ="return verifyPass()" action="AddPatient.jsp" method="Post">
+    <form name="myForm" action="AddPatient.jsp" onsubmit="return validateform()" method="post">
     <div class="container">
     <h1>Register</h1>
     <p>Please fill in this form to create an account.</p>
@@ -107,7 +106,7 @@ a {
     <input type="text" placeholder="Enter Name" name="name" id="name" required>
     
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    <input type="text" placeholder="Enter Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Enter Valid Email" id="email" required>
     
     <label for="Gender"><b>Gender</b></label> 
     <br>
@@ -118,14 +117,13 @@ a {
     <br>                                     
     <br>
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" id="psw" required>
+    <input type="password" placeholder="Enter Password" name="password" id="psw" pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 
     <label for="cpsw"><b>Confirm Password</b></label>
-    <input type="password" placeholder="Confirm Password" name="cpsw" id="cpsw" required>
-    <span id = "message" style="color:red"> </span> <br><br> 
+    <input type="password" placeholder="Confirm Password" name="cpsw" id="cpsw" pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" required>
     
     <label for="mobile"><b>Mobile Number</b></label>
-    <input type="number" placeholder="Enter Mobile Number" name="mobile" id="mobile" required>
+    <input type="text" placeholder="Enter Mobile Number" name="mobile" id="mobile" pattern="[6-9]{1}[0-9]{9}" title="enter valid Mobile number" required>
     <br>
     <br>
     <label for="DOB"><b>DOB       </b></label>

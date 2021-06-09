@@ -237,9 +237,9 @@ else{
                 </thead>
                 <tbody>
                     <%
-                        String dname = request.getParameter("uname");
+                        String emailll = request.getParameter("uname");
                          AppoinmentManager mgr1 = new AppoinmentManager();
-                    ResultSet rs = mgr1.pandingAppoinmentlist(dname);
+                    ResultSet rs = mgr1.pandingAppoinmentlist(emailll);
             
             while(rs.next())
             {

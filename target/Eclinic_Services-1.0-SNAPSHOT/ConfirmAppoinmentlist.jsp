@@ -239,7 +239,7 @@ else{
                 <tbody>
                     <%
                     AppoinmentManager mgr1 = new AppoinmentManager();
-                    ResultSet rs1 = mgr1.ConfirmAppoinmentlist(rs.getString("name"));
+                    ResultSet rs1 = mgr1.ConfirmAppoinmentlist(email1);
             while(rs1.next())
             {
               %>

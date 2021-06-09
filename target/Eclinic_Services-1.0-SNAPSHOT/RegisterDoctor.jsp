@@ -111,6 +111,21 @@
 }
         </style>
     </head>
+    
+    <script>
+    
+    function validateform(){  
+var password=document.myForm.password.value;  
+var cpsw = document.myForm.confirmpassw.value; 
+if(password!=cpsw){  
+  alert("Password not match.");  
+  return false;  
+  }  
+}  
+    
+</script>
+
+    
     <body>
         <%
         String   email1 = null;
@@ -146,7 +161,7 @@ else{
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Doctor</a>
                             </li>
                         </ul>
-                        <form action="AddDoctorInDB.jsp" method="Post">
+                        <form name="myForm" action="AddDoctorInDB.jsp" onsubmit="return validateform()" method="Post">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <h3 class="register-heading">Register New</h3>
@@ -156,10 +171,10 @@ else{
                                             <input type="text" class="form-control" placeholder="Full Name *" name="name" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Password *" name="password" required>
+                                            <input type="password" class="form-control" placeholder="Password *" name="password" pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control"  placeholder="Confirm Password *" name="confirmpassw" required>
+                                            <input type="password" class="form-control"  placeholder="Confirm Password *" name="confirmpassw" pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control" placeholder="Address *" name="address" required>
@@ -179,19 +194,13 @@ else{
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Email ID *" name="email" required>
+                                            <input type="email" class="form-control" placeholder="Email ID *" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Enter Valid Email" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10" name="txtPhone" class="form-control" placeholder="Phone Number*" required>
+                                            <input type="text" minlength="10" maxlength="10" name="txtPhone" class="form-control" placeholder="Phone Number*" pattern="[6-9]{1}[0-9]{9}" title="enter valid Mobile number" required>
                                         </div>
                                         <div class="form-group">
-                                            <select name="spec" class="form-control">
-                                                <option class="hidden"  selected disabled>Please select Doctor specialization</option>
-                                                <option>Dental</option>
-                                                <option>Cardiology</option>
-                                                <option>Neurology</option>
-                                                <option>Laboratry</option>
-                                            </select>
+                                            <input type="text" class="form-control" placeholder="Doctor specialization*" "spec" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control" placeholder="Enter Qualification *" name="qualification" required>

@@ -238,7 +238,7 @@ else{
                 <tbody>
                     <%
                         AppoinmentManager mgr1 = new AppoinmentManager();
-                    ResultSet rs1 = mgr1.DeclineAppoinmentlist(rs.getString("name"));
+                    ResultSet rs1 = mgr1.DeclineAppoinmentlist(email1);
             while(rs1.next())
             {
               %>

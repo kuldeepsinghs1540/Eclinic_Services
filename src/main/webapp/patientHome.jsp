@@ -194,13 +194,13 @@ else{
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="subject">Email Address</label>
-                                        <input type="email" class="form-control" placeholder="Email" name="email" required>
+                                        <input type="email" class="form-control" placeholder="Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Enter Valid Email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="subject">Phone Number</label>
-                                        <input type="text" class="form-control" placeholder="Your Phone Number" name="mobile" required>
+                                        <input type="text" class="form-control" placeholder="Your Phone Number" name="mobile" pattern="[6-9]{1}[0-9]{9}" title="enter valid Mobile number" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -226,9 +226,9 @@ else{
                                                         
                                                         while(rs1.next())
                                                         {
-                                                          String name1 =  rs1.getString("name");
+                                                          String emailll =  rs1.getString("email");
                                                         %>
-                                                        <option value="<%= name1%>"><%= name1%></option>
+                                                        <option value="<%= emailll%>"><%= emailll%></option>
                                                     <%
                                                         }
                                                     %>
