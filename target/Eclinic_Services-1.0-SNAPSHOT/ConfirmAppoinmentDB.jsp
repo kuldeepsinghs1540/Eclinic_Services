@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.AppoinmentManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -15,21 +16,14 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <jsp:useBean id="d" class="DTO.Appointment" scope="request">
+            <jsp:setProperty name="d" property="*"></jsp:setProperty>
+        </jsp:useBean>
+        
         <%
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String mobile = request.getParameter("mobile");
-        String gender = request.getParameter("gender");
-        String date = request.getParameter("date");
-        String time = request.getParameter("time");
-        Connection connection = Mycon.MyConnection.getcon();
-            String update = "update appointment set Status=?, aDate=?, atime=? where email=?";
-            PreparedStatement preparedStatement = connection.prepareStatement(update);
-            preparedStatement.setString(1,"Accept");
-            preparedStatement.setString(2,date);
-            preparedStatement.setString(3,time);
-            preparedStatement.setString(4,email);
-            int x = preparedStatement.executeUpdate();
+            AppoinmentManager mgr = new AppoinmentManager();
+            int x=mgr.confirmAppoinmentDB(d);
             if(x>0){
             %>
             

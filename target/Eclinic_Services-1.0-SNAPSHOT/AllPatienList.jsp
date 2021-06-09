@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.PatientManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -233,28 +234,19 @@ else{
                 </thead>
                 <tbody>
                     <%
-                    Connection connection = Mycon.MyConnection.getcon();
-                    String fetch = "select * from patient";
-                    PreparedStatement pst=connection.prepareStatement(fetch);
-              
-            ResultSet rs=pst.executeQuery();
+            PatientManager mgr=new PatientManager();
+            ResultSet rs= mgr.allPatient();
             while(rs.next())
             {
-              String name =  rs.getString("name");
-              String email =  rs.getString("email");
-              String mobile = rs.getString("mobile");
-              String Gender = rs.getString("Gender");
-              String dob = rs.getString("DOB");
-                    %>
+            %>
                     <tr>
-                        <td><%= name %></td>
-                        <td><%= email%></td>
-                        <td><%= mobile %></td>                        
-                       <td><%= Gender %></td>
-                        <td><%= dob %></td>
-                        
+                        <td><%= rs.getString("name") %></td>
+                        <td><%= rs.getString("email")%></td>
+                        <td><%= rs.getString("mobile") %></td>
+                        <td><%= rs.getString("Gender") %></td>                        
+                        <td><%= rs.getString("DOB") %></td> 
                         <td>
-                            <a href="DeletPatient.jsp?uemail=<%= email%>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                            <a href="DeletPatient.jsp?uemail=<%= rs.getString("email")%>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                         </td>
                     </tr>
                   <%

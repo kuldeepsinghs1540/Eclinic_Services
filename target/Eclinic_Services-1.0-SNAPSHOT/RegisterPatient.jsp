@@ -81,17 +81,30 @@ a {
 }
 </style>
 </head>
+<script>
+    
+    function verifyPass(){
+        var validation = (document.getElementById('psw').value == document.getElementById('cpsw').value);
+      if(!validation){
+         alert('Something went wrong...Plese reenter password');
+         return false;
+      }
+      return true;
+   }
+    }
+    
+</script>
 <body>
 
     <div class="formcenter">
-    <form action="AddPatient.jsp" method="Post">
+    <form onsubmit ="return verifyPass()" action="AddPatient.jsp" method="Post">
     <div class="container">
     <h1>Register</h1>
     <p>Please fill in this form to create an account.</p>
     <hr>
     
     <label for="name"><b>Name</b></label>
-    <input type="text" placeholder="Enter Name" name="Name" id="name" required>
+    <input type="text" placeholder="Enter Name" name="name" id="name" required>
     
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" id="email" required>
@@ -105,11 +118,12 @@ a {
     <br>                                     
     <br>
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+    <input type="password" placeholder="Enter Password" name="password" id="psw" required>
 
     <label for="cpsw"><b>Confirm Password</b></label>
-    <input type="password" placeholder="Confirm Password" name="cpsw" id="psw" required>
-
+    <input type="password" placeholder="Confirm Password" name="cpsw" id="cpsw" required>
+    <span id = "message" style="color:red"> </span> <br><br> 
+    
     <label for="mobile"><b>Mobile Number</b></label>
     <input type="number" placeholder="Enter Mobile Number" name="mobile" id="mobile" required>
     <br>
@@ -120,7 +134,7 @@ a {
     <br>
     <hr>
     <label for="desies"><b>Desies</b></label>
-    <input type="text" placeholder="Enter desies" name="Desies"required>
+    <input type="text" placeholder="Enter desies" name="desies"required>
     
     <hr>
     <button type="submit" class="registerbtn">register</button>

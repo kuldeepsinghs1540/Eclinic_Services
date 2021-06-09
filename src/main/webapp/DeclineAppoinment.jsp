@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.AppoinmentManager"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,12 +17,8 @@
     <body>
         <%
         String email = request.getParameter("uemail");
-        Connection connection = Mycon.MyConnection.getcon();
-            String update = "update appointment set Status=? where email=?";
-            PreparedStatement preparedStatement = connection.prepareStatement(update);
-            preparedStatement.setString(1,"Rejected");
-            preparedStatement.setString(2,email);
-            int x = preparedStatement.executeUpdate();
+        AppoinmentManager mgr=new AppoinmentManager();
+           int x= mgr.declineAppoinment(email);
             if(x>0){
             %>
             

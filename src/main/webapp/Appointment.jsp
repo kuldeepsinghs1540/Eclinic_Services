@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.AppoinmentManager"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,31 +32,15 @@
             <%  
         }
 else{
+        %>
+        <jsp:useBean id="d" class="DTO.Appointment" scope="request">
+            <jsp:setProperty name="d" property="*"></jsp:setProperty>
+        </jsp:useBean>
         
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String Adate = null;
-        String appointment = null;
-        String drName = request.getParameter("drName");
-        String message = request.getParameter("message");
-        String gender = request.getParameter("gender");
-        String mobile = request.getParameter("mobile");
-        String status = "Pending";
-        try{
-            Connection connection = Mycon.MyConnection.getcon();
-            String insert = "insert into appointment value(?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(insert);
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, email);
-            preparedStatement.setString(3, drName);
-            preparedStatement.setString(4, gender);
-            preparedStatement.setString(5, mobile);
-            preparedStatement.setString(6, Adate);
-            preparedStatement.setString(7, appointment);
-            preparedStatement.setString(8, message);
-            preparedStatement.setString(9, email1);
-            preparedStatement.setString(10, status);
-            int x = preparedStatement.executeUpdate();
+        <%
+            AppoinmentManager mgr = new AppoinmentManager();
+            int x = mgr.saveAppoinment(d);
+            //String name = request.getParameter("name");
             if(x>0){
                  %>            
             <script>
@@ -71,9 +56,6 @@ else{
             </script>
             <%  
             }
-        }catch(Exception ex){
-            out.println("Ex is "+ex);
-}
 
     }
 }

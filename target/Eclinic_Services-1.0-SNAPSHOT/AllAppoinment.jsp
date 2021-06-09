@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.AppoinmentManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -237,33 +238,20 @@ else{
                 </thead>
                 <tbody>
                     <%
-                    Connection connection = Mycon.MyConnection.getcon();
-                    String fetch = "select * from appointment";
-                    PreparedStatement pst=connection.prepareStatement(fetch);
-              
-            ResultSet rs=pst.executeQuery();
-            int count = 0;
+                    AppoinmentManager mgr=new AppoinmentManager();
+                    ResultSet rs= mgr.allAppoinment();
             while(rs.next())
             {
-                count++;
-              String name =  rs.getString("name");
-              String email =  rs.getString("email");
-              String doctor  = rs.getString("doctor");
-              String gender = rs.getString("Gender");
-              String mobile = rs.getString("mobile");
-              String message = rs.getString("message");
-              String status = rs.getString("Status");
-              String mainemail = rs.getString("mainEmail");
-                    %>
+              %>
                     <tr>
-                        <td><%= name %></td>
-                        <td><%= email%></td>
-                        <td><%= doctor%></td>
-                        <td><%= mobile %></td>                        
-                        <td><%= gender %></td>
-                        <td><%= message %></td>
-                        <td><%= mainemail %></td>
-                        <td><%= status %></td>
+                        <td><%= rs.getString("name") %></td>
+                        <td><%= rs.getString("email")%></td>
+                        <td><%= rs.getString("doctor")%></td>
+                        <td><%= rs.getString("mobile") %></td>
+                        <td><%= rs.getString("Gender") %></td>
+                        <td><%= rs.getString("message") %></td>
+                        <td><%= rs.getString("mainEmail") %></td>
+                        <td><%= rs.getString("Status") %></td>
                     </tr>
                   <%
                       }

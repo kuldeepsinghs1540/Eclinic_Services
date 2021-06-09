@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.AppoinmentManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -208,17 +209,12 @@ $(document).ready(function(){
             <%  
         }
 else{
-        Connection connection = Mycon.MyConnection.getcon();
-        String featch = "select * from doctorinformation where email=? and password=?";
-        PreparedStatement preparedStatement = connection.prepareStatement(featch);
-        preparedStatement.setString(1, email1);
-        preparedStatement.setString(2, pass1);
-        ResultSet rs = preparedStatement.executeQuery();
+        AppoinmentManager mgr = new AppoinmentManager();
+        ResultSet rs = mgr.checkDoctorValid(email1,pass1);        
         
         if(rs.next())
       {
-      name = rs.getString("name");
-    %>
+      %>
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -241,26 +237,17 @@ else{
                 </thead>
                 <tbody>
                     <%
-                    Connection connection1 = Mycon.MyConnection.getcon();
-                    String fetch = "select * from appointment where doctor=? and Status=?";
-                    PreparedStatement pst=connection1.prepareStatement(fetch);
-                    pst.setString(1, name);
-                    pst.setString(2, "Rejected");
-            ResultSet rs1=pst.executeQuery();
+                        AppoinmentManager mgr1 = new AppoinmentManager();
+                    ResultSet rs1 = mgr1.DeclineAppoinmentlist(rs.getString("name"));
             while(rs1.next())
             {
-              String name1 =  rs1.getString("name");
-              String email =  rs1.getString("email");
-              String mobile = rs1.getString("mobile");
-              String gender = rs1.getString("Gender");
-              String message = rs1.getString("message");
-                   %>
+              %>
                     <tr>
-                        <td><%= name1 %></td>
-                        <td><%= email%></td>
-                        <td><%= gender%></td>
-                        <td><%= mobile %></td>                        
-                        <td><%= message %></td>
+                        <td><%= rs1.getString("name") %></td>
+                        <td><%= rs1.getString("email")%></td>
+                        <td><%= rs1.getString("Gender")%></td>
+                        <td><%= rs1.getString("mobile") %></td>                        
+                        <td><%= rs1.getString("message") %></td>
                     </tr>
                   <%
                       }

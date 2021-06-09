@@ -206,18 +206,17 @@ else{
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="subject">Appointment Date and Time</label>
-                                       <input type="text" class="form-control" value="<%= (new java.util.Date()).toLocaleString()%>" name="Adate" required readonly>
+                                       <input type="text" class="form-control" value="<%= (new java.util.Date()).toLocaleString()%>" name="datetime" required readonly>
 
                                     </div>
                                 </div>
-                                
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                  <div class="form-group">
                                         <label for="subject">Select A Doctor</label>
                                         <div class="form-field">
                                             <div class="select-wrap">
                                                 <div class="icon"><span class="fa fa-chevron-down"></span></div>
-                                                <select name="drName" id="" class="form-control">
+                                                <select name="doctor" id="" class="form-control">
                                                      <%
                                                         Connection connection1 = Mycon.MyConnection.getcon();
                                                         String fetch = "select * from doctorinformation";
@@ -236,6 +235,12 @@ else{
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="subject">Registerd Email</label>
+                                        <input type="email" class="form-control" value=<%= email1%> name="mainEmail" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

@@ -10,19 +10,19 @@ package DTO;
  * @author kulde
  */
 public class Patient {
-       private String name , email ,gender,psw,mobile,DOB,Desies;
+           private String name,email,gender,password,mobile,DOB,desies;
 
     public Patient() {
     }
 
-    public Patient(String name, String email, String gender, String psw, String mobile, String DOB, String Desies) {
+    public Patient(String name, String email, String gender, String password, String mobile, String DOB, String desies) {
         this.name = name;
         this.email = email;
         this.gender = gender;
-        this.psw = psw;
+        this.password = password;
         this.mobile = mobile;
         this.DOB = DOB;
-        this.Desies = Desies;
+        this.desies = desies;
     }
 
     public String getName() {
@@ -49,12 +49,14 @@ public class Patient {
         this.gender = gender;
     }
 
-    public String getPsw() {
-        return psw;
+    
+
+    public String getPassword() {
+        return password;
     }
 
-    public void setPsw(String psw) {
-        this.psw = psw;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getMobile() {
@@ -74,11 +76,11 @@ public class Patient {
     }
 
     public String getDesies() {
-        return Desies;
+        return desies;
     }
 
-    public void setDesies(String Desies) {
-        this.Desies = Desies;
+    public void setDesies(String desies) {
+        this.desies = desies;
     }
-       
+
 }

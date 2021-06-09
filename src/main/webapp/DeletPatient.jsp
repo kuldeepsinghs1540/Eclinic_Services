@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.PatientManager"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,30 +17,23 @@
     <body>
         <%
         String useremail=request.getParameter("uemail");
-        try {
-            Connection connection = Mycon.MyConnection.getcon();
-            String delete = "delete from patient where email = ?";
-            PreparedStatement pst=connection.prepareStatement(delete);
-            pst.setString(1, useremail);
-            int x = pst.executeUpdate();
+        PatientManager mgr=new PatientManager();
+            int x= mgr.deletPatient(useremail);
             if(x!=0){
                 %>
             <script>
                         alert('Patient Deleted');
-                        window.location = "AllPatient.jsp";
+                        window.location = "AllPatienList.jsp";
             </script>
             <%
             }else{
                 %>
             <script>
                         alert('Patient Not Deleted');
-                        window.location = "AllPatient.jsp";
+                        window.location = "AllPatienList.jsp";
             </script>
             <%
             }
-        }catch(Exception ex){
-            System.out.println("ex is "+ex);
-        }
         
         %>
     </body>

@@ -10,21 +10,21 @@ package DTO;
  * @author kulde
  */
 public class Appointment {
-    String name,email ,Adate ,appointment,drName ,message , gender ,mobile , status,mainemail;
+    String name,email ,aDate ,atime,doctor,message,Gender,mobile,Status,mainEmail;
     public Appointment() {
     }
 
-    public Appointment(String name, String email, String Adate, String appointment, String drName, String message, String gender, String mobile, String status,String mainemail) {
+    public Appointment(String name, String email, String aDate, String atime, String doctor, String message, String Gender, String mobile, String Status, String mainEmail) {
         this.name = name;
         this.email = email;
-        this.Adate = Adate;
-        this.appointment = appointment;
-        this.drName = drName;
+        this.aDate = aDate;
+        this.atime = atime;
+        this.doctor = doctor;
         this.message = message;
-        this.gender = gender;
+        this.Gender = Gender;
         this.mobile = mobile;
-        this.status = status;
-        this.mainemail = mainemail;
+        this.Status = Status;
+        this.mainEmail = mainEmail;
     }
 
     public String getName() {
@@ -43,28 +43,28 @@ public class Appointment {
         this.email = email;
     }
 
-    public String getAdate() {
-        return Adate;
+    public String getaDate() {
+        return aDate;
     }
 
-    public void setAdate(String Adate) {
-        this.Adate = Adate;
+    public void setaDate(String aDate) {
+        this.aDate = aDate;
     }
 
-    public String getAppointment() {
-        return appointment;
+    public String getAtime() {
+        return atime;
     }
 
-    public void setAppointment(String appointment) {
-        this.appointment = appointment;
+    public void setAtime(String atime) {
+        this.atime = atime;
     }
 
-    public String getDrName() {
-        return drName;
+    public String getDoctor() {
+        return doctor;
     }
 
-    public void setDrName(String drName) {
-        this.drName = drName;
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
     }
 
     public String getMessage() {
@@ -76,11 +76,11 @@ public class Appointment {
     }
 
     public String getGender() {
-        return gender;
+        return Gender;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setGender(String Gender) {
+        this.Gender = Gender;
     }
 
     public String getMobile() {
@@ -92,19 +92,19 @@ public class Appointment {
     }
 
     public String getStatus() {
-        return status;
+        return Status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(String Status) {
+        this.Status = Status;
     }
 
-    public String getMainemail() {
-        return mainemail;
+    public String getMainEmail() {
+        return mainEmail;
     }
 
-    public void setMainemail(String mainemail) {
-        this.mainemail = mainemail;
+    public void setMainEmail(String mainEmail) {
+        this.mainEmail = mainEmail;
     }
-    
+
 }

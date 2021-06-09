@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.PatientManager"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,27 +15,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%
-        String name = request.getParameter("Name");
-        String email = request.getParameter("email");
-        String gender = request.getParameter("gender");
-        String psw = request.getParameter("psw");
-        String mobile = request.getParameter("mobile");
-        String DOB = request.getParameter("DOB");
-        String Desies = request.getParameter("Desies");
+        <jsp:useBean id="d" class="DTO.Patient" scope="request">
+            <jsp:setProperty name="d" property="*"></jsp:setProperty>
+        </jsp:useBean>
         
-        try{
-            Connection connection = Mycon.MyConnection.getcon();
-            String insert = "insert into patient value(?,?,?,?,?,?,?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(insert);
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, email);
-            preparedStatement.setString(3, gender);
-            preparedStatement.setString(4, psw);
-            preparedStatement.setString(5, mobile);
-            preparedStatement.setString(6, DOB);
-            preparedStatement.setString(7, Desies);
-            int x = preparedStatement.executeUpdate();
+        <%
+            PatientManager mgr = new PatientManager();
+            int x=mgr.savePatient(d);
             if(x>0){
                  %>
             <script>
@@ -51,9 +38,6 @@
             </script>
             <%
             }
-        }catch(Exception ex){
-            out.println("Ex is "+ex);
-        }
         %>
     </body>
 </html>

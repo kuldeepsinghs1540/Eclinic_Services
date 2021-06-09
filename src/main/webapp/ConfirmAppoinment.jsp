@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.AppoinmentManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -148,42 +149,34 @@
     </style>
   </head>
   <body>
+           
       <%
-          String name = null,email = null,mobile=null,gender=null;
-          
-                String pemail = request.getParameter("uemail");
-                    Connection connection = Mycon.MyConnection.getcon();
-                    String fetch = "select * from appointment where email=?";
-                    PreparedStatement pst=connection.prepareStatement(fetch);
-                    pst.setString(1, pemail);
-            ResultSet rs=pst.executeQuery();
+          String pemail = request.getParameter("uemail");
+          AppoinmentManager mgr=new AppoinmentManager();
+           ResultSet rs= mgr.ConfirmAppoinment(pemail);
+                    
             if(rs.next())
             {
-              name =  rs.getString("name");
-              email =  rs.getString("email");
-              mobile = rs.getString("mobile");
-              gender = rs.getString("gender");
-              
-             %>
+           %>
     <div class="main-block">
       <h1>Accept and give date</h1>
       <form action="ConfirmAppoinmentDB.jsp">
         <hr>
         <label id="icon" for="name"><i class="fas fa-envelope"></i></label>
-        <input type="text" name="email" id="name" value="<%= email%>" readonly/>
+        <input type="text" name="email" id="name" value="<%= rs.getString("email")%>" readonly/>
         <label id="icon" for="name"><i class="fas fa-user"></i></label>
-        <input type="text" name="name" id="name" value="<%= name%>" readonly/>
+        <input type="text" name="name" id="name" value="<%= rs.getString("name")%>" readonly/>
         <label id="icon" for="name"><i class="fas fa-mobile"></i></label>
-        <input type="text" name="mobile" id="name" value="<%= mobile%>" readonly/>
+        <input type="text" name="mobile" id="name" value="<%= rs.getString("mobile")%>" readonly/>
         <hr>
         <%
-        if(gender.equals("male")){
+        if(rs.getString("gender").equals("male")){
             
         %>
         <div class="gender">
-          <input type="radio" value="male" id="male" name="gender" checked/>
+          <input type="radio" value="male" id="male" name="Gender" checked/>
           <label for="male" class="radio">Male</label>
-          <input type="radio" value="female" id="female" name="gender" />
+          <input type="radio" value="female" id="female" name="Gender" />
           <label for="female" class="radio">Female</label>
         </div>
         <%
@@ -191,9 +184,9 @@
                 
             %>
           <div class="gender">
-          <input type="radio" value="male" id="male" name="gender" />
+          <input type="radio" value="male" id="male" name="Gender" />
           <label for="male" class="radio">Male</label>
-          <input type="radio" value="female" id="female" name="gender" checked readonly/>
+          <input type="radio" value="female" id="female" name="Gender" checked readonly/>
           <label for="female" class="radio">Female</label>
         </div>
 
@@ -202,11 +195,11 @@
         %>
         <hr>
         <label id="icon" for="name"><i class="fas fa-calendar"></i></label>
-        <input type="date" name="date" id="name"  required/>
+        <input type="date" name="aDate" id="name"  required/>
          <br>
  <br>
         <label id="icon" for="name"><i class="far fa-clock"></i></label>
-        <input type="time" name="time" id="name"  required/>
+        <input type="time" name="atime" id="name"  required/>
        <hr>
         <div class="btn-block">
           <button type="submit" href="/">Send Appoinment</button>

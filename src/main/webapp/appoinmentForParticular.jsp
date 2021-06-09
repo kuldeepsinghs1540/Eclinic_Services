@@ -4,6 +4,7 @@
     Author     : kulde
 --%>
 
+<%@page import="DAO.AppoinmentManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -207,12 +208,8 @@ $(document).ready(function(){
             <%  
         }
 else{
-        Connection connection1 = Mycon.MyConnection.getcon();
-        String featch = "select * from doctorinformation where email=? and password=?";
-        PreparedStatement preparedStatement1 = connection1.prepareStatement(featch);
-        preparedStatement1.setString(1, email1);
-        preparedStatement1.setString(2, pass1);
-        ResultSet rs1 = preparedStatement1.executeQuery();
+        AppoinmentManager mgr = new AppoinmentManager();
+        ResultSet rs1 = mgr.checkDoctorValid(email1,pass1);        
         
         if(rs1.next())
       {
@@ -241,29 +238,21 @@ else{
                 <tbody>
                     <%
                         String dname = request.getParameter("uname");
-                    Connection connection = Mycon.MyConnection.getcon();
-                    String fetch = "select * from appointment where doctor=? and Status=?";
-                    PreparedStatement pst=connection.prepareStatement(fetch);
-                    pst.setString(1, dname);
-                    pst.setString(2, "Pending");
-            ResultSet rs=pst.executeQuery();
+                         AppoinmentManager mgr1 = new AppoinmentManager();
+                    ResultSet rs = mgr1.pandingAppoinmentlist(dname);
+            
             while(rs.next())
             {
-              String name =  rs.getString("name");
-              String email =  rs.getString("email");
-              String mobile = rs.getString("mobile");
-              String gender = rs.getString("gender");
-              String message = rs.getString("message");
-                   %>
+              %>
                     <tr>
-                        <td><%= name %></td>
-                        <td><%= email%></td>
-                        <td><%= mobile %></td>                        
-                        <td><%= gender%></td>
-                        <td><%= message %></td>
+                        <td><%= rs.getString("name") %></td>
+                        <td><%= rs.getString("email")%></td>
+                        <td><%= rs.getString("mobile") %></td>                        
+                        <td><%= rs.getString("gender")%></td>
+                        <td><%= rs.getString("message") %></td>
                         <td>
-                            <a href="ConfirmAppoinment.jsp?uemail=<%= email%>" class="settings" title="Accept" data-toggle="tooltip"><i class="material-icons">&#xf046;</i></a>
-                            <a href="DeclineAppoinment.jsp?uemail=<%= email%>" class="delete" title="Decline " data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                            <a href="ConfirmAppoinment.jsp?uemail=<%= rs.getString("email")%>" class="settings" title="Accept" data-toggle="tooltip"><i class="material-icons">&#xf046;</i></a>
+                            <a href="DeclineAppoinment.jsp?uemail=<%= rs.getString("email")%>" class="delete" title="Decline " data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                         </td>
                     </tr>
                   <%
